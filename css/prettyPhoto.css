@@ -1,0 +1,391 @@
+/*
+	MESSAGE FROM BEBEL:
+	
+	please note that we hacked this pretty little box to set up our very own lightbox style.
+	thus there is no more support for the official pretty photo styles.
+	
+	if you want to use the normal pretty photo themes, please replace this css with the original css file, upload the styles to
+	/images/prettyPhoto/ and edit the prettyPhoto implementation.
+	
+*/
+
+/* ------------------------------------------------------------------------
+	This you can edit.
+------------------------------------------------------------------------- */
+
+	div.light_rounded .pp_top .pp_left { background: url(../images/prettyPhoto/light_rounded/sprite.png) -88px -53px no-repeat; } /* Top left corner */
+	div.light_rounded .pp_top .pp_middle { background: #fff; } /* Top pattern/color */
+	div.light_rounded .pp_top .pp_right { background: url(../images/prettyPhoto/light_rounded/sprite.png) -110px -53px no-repeat; } /* Top right corner */
+	
+	div.light_rounded .pp_content .ppt { color: #000; }
+	div.light_rounded .pp_content_container .pp_left,
+	div.light_rounded .pp_content_container .pp_right { background: #fff; }
+	div.light_rounded .pp_content { background-color: #fff; } /* Content background */
+	div.light_rounded .pp_next:hover { background: url(../images/prettyPhoto/light_rounded/btnNext.png) center right  no-repeat; cursor: pointer; } /* Next button */
+	div.light_rounded .pp_previous:hover { background: url(../images/prettyPhoto/light_rounded/btnPrevious.png) center left no-repeat; cursor: pointer; } /* Previous button */
+	div.light_rounded .pp_expand { background: url(../images/prettyPhoto/light_rounded/sprite.png) -31px -26px no-repeat; cursor: pointer; } /* Expand button */
+	div.light_rounded .pp_expand:hover { background: url(../images/prettyPhoto/light_rounded/sprite.png) -31px -47px no-repeat; cursor: pointer; } /* Expand button hover */
+	div.light_rounded .pp_contract { background: url(../images/prettyPhoto/light_rounded/sprite.png) 0 -26px no-repeat; cursor: pointer; } /* Contract button */
+	div.light_rounded .pp_contract:hover { background: url(../images/prettyPhoto/light_rounded/sprite.png) 0 -47px no-repeat; cursor: pointer; } /* Contract button hover */
+	div.light_rounded .pp_close { width: 75px; height: 22px; background: url(../images/prettyPhoto/light_rounded/sprite.png) -1px -1px no-repeat; cursor: pointer; } /* Close button */
+	div.light_rounded #pp_full_res .pp_inline { color: #000; } 
+	div.light_rounded .pp_gallery a.pp_arrow_previous,
+	div.light_rounded .pp_gallery a.pp_arrow_next { margin-top: 12px !important; }
+	div.light_rounded .pp_nav .pp_play { background: url(../images/prettyPhoto/light_rounded/sprite.png) -1px -100px no-repeat; height: 15px; width: 14px; }
+	div.light_rounded .pp_nav .pp_pause { background: url(../images/prettyPhoto/light_rounded/sprite.png) -24px -100px no-repeat; height: 15px; width: 14px; }
+
+	div.light_rounded .pp_arrow_previous { background: url(../images/prettyPhoto/light_rounded/sprite.png) 0 -71px no-repeat; } /* The previous arrow in the bottom nav */
+		div.light_rounded .pp_arrow_previous.disabled { background-position: 0 -87px; cursor: default; }
+	div.light_rounded .pp_arrow_next { background: url(../images/prettyPhoto/light_rounded/sprite.png) -22px -71px no-repeat; } /* The next arrow in the bottom nav */
+		div.light_rounded .pp_arrow_next.disabled { background-position: -22px -87px; cursor: default; }
+
+	div.light_rounded .pp_bottom .pp_left { background: url(../images/prettyPhoto/light_rounded/sprite.png) -88px -80px no-repeat; } /* Bottom left corner */
+	div.light_rounded .pp_bottom .pp_middle { background: #fff; } /* Bottom pattern/color */
+	div.light_rounded .pp_bottom .pp_right { background: url(../images/prettyPhoto/light_rounded/sprite.png) -110px -80px no-repeat; } /* Bottom right corner */
+
+	div.light_rounded .pp_loaderIcon { background: url(../images/prettyPhoto/light_rounded/loader.gif) center center no-repeat; } /* Loader icon */
+
+
+
+/* ------------------------------------------------------------------------
+	DO NOT CHANGE
+------------------------------------------------------------------------- */
+
+	div.pp_pic_holder a:focus { outline:none; }
+
+	div.pp_overlay {
+		background: #000;
+		display: none;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 100%;
+		z-index: 9500;
+	}
+	
+	div.pp_pic_holder {
+		display: none;
+		position: absolute;
+		width: 100px;
+		z-index: 10000;
+	}
+		
+		.pp_top {
+			height: 64px;
+			position: relative;
+		}
+			* html .pp_top { padding: 0 64px; }
+		
+			.pp_top .pp_left {
+				height: 64px;
+				left: 8px;
+				position: absolute;
+				width: 64px;
+			}
+			.pp_top .pp_middle {
+				height: 64px;
+				left: 64px;
+				position: absolute;
+				right: 64px;
+			}
+				* html .pp_top .pp_middle {
+					left: 0;
+					position: static;
+				}
+			
+			.pp_top .pp_right {
+				height: 64px;
+				left: auto;
+				position: absolute;
+				right: 4px;
+				top: 0;
+				width: 64px;
+			}
+		
+		.pp_content {  }
+		
+		.pp_fade { display: none; }
+		
+		.pp_content_container {
+			position: relative;
+			text-align: left;
+			width: 100%;
+		}
+		
+			.pp_content_container .pp_left { 
+				padding-left: 64px; 
+			}
+			.pp_content_container .pp_right { 
+				padding-right: 64px;
+				right: 0px;
+			}
+		
+			.pp_content_container .pp_details {
+				margin: 10px 0 2px 0;
+			}
+				.pp_description {
+					display: none;
+					margin: 0 0 5px 0;
+				}
+				
+				.pp_nav {
+					clear: left;
+					float: left;
+					margin: 3px 0 0 0;
+				}
+				
+					.pp_nav p {
+						float: left;
+						margin: 2px 4px;
+					}
+					
+					.pp_nav .pp_play,
+					.pp_nav .pp_pause {
+						float: left;
+						margin-right: 4px;
+						text-indent: -10000px;
+					}
+				
+					a.pp_arrow_previous,
+					a.pp_arrow_next {
+						display: block;
+						float: left;
+						height: 15px;
+						margin-top: 3px;
+						overflow: hidden;
+						text-indent: -10000px;
+						width: 14px;
+					}
+		
+		.pp_hoverContainer {
+			position: absolute;
+			top: 0;
+			width: 100%;
+			z-index: 2000;
+		}
+		
+		.pp_gallery {
+			left: 50%;
+			margin-top: -80px;
+			position: absolute;
+			z-index: 10000;
+		}
+			
+			.pp_gallery ul {
+				float: left;
+				height: 60px;
+				margin: 0 0 0 5px;
+				overflow: hidden;
+				position: relative;
+			}
+			
+			.pp_gallery ul a {
+				border: 0;
+				display: block;
+				float: left;
+				height: 50px;
+				overflow: hidden;
+			}
+			
+			.pp_gallery ul a:hover { border-color: #fff; }
+			
+			.pp_gallery ul a img { border: 0; }
+			
+			.pp_gallery li {
+				display: block;
+				float: left;
+				margin: 0 5px 0 0;
+			}
+			
+			.pp_gallery li.default a {
+				background: url(../images/prettyPhoto/facebook/default_thumbnail.gif) 0 0 no-repeat;
+				display: block;
+				height: 50px;
+				width: 50px;
+			}
+			
+			.pp_gallery li.default a img { display: none; }
+			
+			.pp_gallery .pp_arrow_previous,
+			.pp_gallery .pp_arrow_next {
+				margin-top: 7px !important;
+			}
+		
+		a.pp_next {
+			background: url(../images/prettyPhoto/light_rounded/btnNext.png) 10000px 10000px no-repeat;
+			display: block;
+			float: right;
+			height: 100%;
+			text-indent: -10000px;
+			width: 49%;
+		}
+			
+		a.pp_previous {
+			background: url(../images/prettyPhoto/light_rounded/btnNext.png) 10000px 10000px no-repeat;
+			display: block;
+			float: left;
+			height: 100%;
+			text-indent: -10000px;
+			width: 49%;
+		}
+		
+		a.pp_expand,
+		a.pp_contract {
+			cursor: pointer;
+			display: none;
+			height: 20px;	
+			position: absolute;
+			right: 71px;
+			text-indent: -10000px;
+			top: 23px;
+			width: 20px;
+			z-index: 20000;
+		}
+			
+		a.pp_close {
+			display: block;
+			float: right;
+			text-indent: -10000px;
+		}
+		
+		.pp_bottom {
+			height: 64px;
+			position: relative;
+		}
+			* html .pp_bottom { padding: 0 64px; }
+			
+			.pp_bottom .pp_left {
+				height: 64px;
+				left: 0;
+				position: absolute;
+				width: 64px;
+			}
+			.pp_bottom .pp_middle {
+				position: absolute;
+				height: 64px;
+				right: 64px;
+				left: 64px;
+			}
+				* html .pp_bottom .pp_middle {
+					left: 0;
+					position: static;
+				}
+				
+			.pp_bottom .pp_right {
+				height: 64px;
+				left: auto;
+				position: absolute;
+				right: 0;
+				top: 0;
+				width: 64px;
+			}
+		
+		.pp_loaderIcon {
+			display: block;
+			height: 24px;
+			left: 50%;
+			margin: -12px 0 0 -12px;
+			position: absolute;
+			top: 50%;
+			width: 24px;
+		}
+		
+		#pp_full_res {
+			line-height: 1 !important;
+		}
+		
+			#pp_full_res .pp_inline {
+				text-align: left;
+			}
+			
+				#pp_full_res .pp_inline p { margin: 0 0 15px 0; }
+	
+		div.ppt {
+			color: #fff;
+			display: none;
+			font-size: 17px;
+			margin: 0px;
+			z-index: 9999;
+		}
+
+/* ------------------------------------------------------------------------
+	Miscellaneous
+------------------------------------------------------------------------- */
+
+	.clearfix:after {
+	    content: "."; 
+	    display: block; 
+	    height: 0; 
+	    clear: both; 
+	    visibility: hidden;
+	}
+
+	.clearfix {display: inline-block;}
+
+	/* Hides from IE-mac \*/
+	* html .clearfix {height: 1%;}
+	.clearfix {display: block;}
+	/* End hide from IE-mac */
+
+	
+	/* ----------------------------------
+		Traveler Theme by Bebel 
+	----------------------------------- */
+	
+	div.traveler .pp_top .pp_left { 
+		background:  url(../images/prettyPhoto/traveler/corner_up_left.png) no-repeat;
+	} /* Top left corner */
+	div.traveler .pp_top .pp_middle {
+		background: url(../images/prettyPhoto/traveler/up_repeater.png) repeat-x;
+	} /* Top pattern/color */
+	div.traveler .pp_top .pp_right { 
+		background: url(../images/prettyPhoto/traveler/corner_up_right.png) no-repeat;
+	} /* Top right corner */
+	
+	div.traveler .pp_content_container .pp_left { 
+		background: url(../images/prettyPhoto/traveler/left_repeater.png) repeat-y;
+		
+	} /* Left Content background */
+	div.traveler .pp_content_container .pp_right { 
+		background: url(../images/prettyPhoto/traveler/right_repeater.png) right repeat-y;
+		 
+	} /* Right Content background */
+	div.traveler .pp_content { 
+		background: #292218;
+	} /* Content background */
+	div.traveler .pp_next:hover { background: url(../images/prettyPhoto/traveler/btnNext.png) center right  no-repeat; cursor: pointer; } /* Next button */
+	div.traveler .pp_previous:hover { background: url(../images/prettyPhoto/traveler/btnPrevious.png) center left no-repeat; cursor: pointer; } /* Previous button */
+	div.traveler .pp_expand { background: url(../images/prettyPhoto/traveler/sprite.png) -31px -26px no-repeat; cursor: pointer; } /* Expand button */
+	div.traveler .pp_expand:hover { background: url(../images/prettyPhoto/traveler/sprite.png) -31px -47px no-repeat; cursor: pointer; } /* Expand button hover */
+	div.traveler .pp_contract { background: url(../images/prettyPhoto/traveler/sprite.png) 0 -26px no-repeat; cursor: pointer; } /* Contract button */
+	div.traveler .pp_contract:hover { background: url(../images/prettyPhoto/traveler/sprite.png) 0 -47px no-repeat; cursor: pointer; } /* Contract button hover */
+	div.traveler .pp_close { width: 75px; height: 22px; background: url(../images/prettyPhoto/traveler/sprite.png) -1px -1px no-repeat; cursor: pointer; } /* Close button */
+	div.traveler .currentTextHolder { color: #c4c4c4; }
+	div.traveler .pp_description { color: #fff; }
+	div.traveler #pp_full_res .pp_inline { color: #fff; }
+	div.traveler .pp_gallery a.pp_arrow_previous,
+	div.traveler .pp_gallery a.pp_arrow_next { margin-top: 12px !important; }
+	div.traveler .pp_nav .pp_play { background: url(../images/prettyPhoto/traveler/sprite.png) -1px -100px no-repeat; height: 15px; width: 14px; }
+	div.traveler .pp_nav .pp_pause { background: url(../images/prettyPhoto/traveler/sprite.png) -24px -100px no-repeat; height: 15px; width: 14px; }
+
+	div.traveler .pp_arrow_previous { background: url(../images/prettyPhoto/traveler/sprite.png) 0 -71px no-repeat; } /* The previous arrow in the bottom nav */
+	div.traveler .pp_arrow_previous.disabled { background-position: 0 -87px; cursor: default; }
+	div.traveler .pp_arrow_next { background: url(../images/prettyPhoto/traveler/sprite.png) -22px -71px no-repeat; } /* The next arrow in the bottom nav */
+	div.traveler .pp_arrow_next.disabled { background-position: -22px -87px; cursor: default; }
+
+	div.traveler .pp_bottom .pp_left { 
+		background: url(../images/prettyPhoto/traveler/corner_down_left.png) no-repeat;
+		width: 64px; 
+		height: 64px;
+	} /* Bottom left corner */
+	div.traveler .pp_bottom .pp_middle {
+		background: url(../images/prettyPhoto/traveler/bottom_repeater.png) repeat-x;
+	} /* Bottom pattern/color */
+	div.traveler .pp_bottom .pp_right { 
+		background: url(../images/prettyPhoto/traveler/corner_down_right.png) no-repeat;
+		width: 64px; 
+		height: 64px;
+	} /* Bottom right corner */
+
+	div.dark_rounded .pp_loaderIcon { background: url(../images/prettyPhoto/dark_rounded/loader.gif) center center no-repeat; } /* Loader icon */
+	
