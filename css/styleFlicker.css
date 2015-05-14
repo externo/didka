@@ -23,12 +23,6 @@
 	margin: 0;
 }
 
-.flickrpress-container .flickr_item_view_squares img {
-	width: 75px;
-	height: 75px;
-	background: url(spinner.gif) no-repeat center center;
-}
-
 .flickrpress-container .flickrpress-navigation {
 	margin-top: 10px;
 }
@@ -43,12 +37,6 @@
 	float: right;
 	font-weight: bold;
 	cursor: pointer;
-}
-
-.pending .flickrpress-navigation div {
-   text-indent: -9999px;
-   background: url(spinner.gif) no-repeat center center;
-   width: 16px; height: 16px;
 }
 
 .flickrpress-container .flickrpress-items div span {
